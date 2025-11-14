@@ -141,15 +141,9 @@ ACO-Visualization/
 - JavaScript vanilla (sin dependencias)
 - CSS3 para estilos
 
-## Autor
-
-Implementación basada en:
-- Tema 10: Optimización por Colonia de Hormigas
-- Algoritmos de Búsqueda II
-- J.M. Colmenar
 
 ## Referencias
 
 - Dorigo, M. (1992). Optimization, learning and natural algorithms. PhD thesis, Politecnico di Milano, Italy.
 - Dorigo, M., Maniezzo, V., & Colorni, A. (1996). Ant system: optimization by a colony of cooperating agents. IEEE transactions on systems, man, and cybernetics, part b (cybernetics), 26(1), 29-41.
-# -Visualizacion-ACO
+-  Implementación basada en: Tema 10: Optimización por Colonia de Hormigas. Algoritmos de Búsqueda II J.M. Colmenar
