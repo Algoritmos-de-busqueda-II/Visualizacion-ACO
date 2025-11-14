@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
     color: #333;
     min-height: 100vh;
     padding: 20px;
@@ -22,7 +22,7 @@ body {
 }
 
 header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
     color: white;
     padding: 30px;
     text-align: center;
@@ -56,7 +56,7 @@ header p {
 }
 
 .control-panel h2 {
-    color: #667eea;
+    color: #8B4513;
     margin-bottom: 20px;
     font-size: 1.5em;
 }
@@ -70,10 +70,10 @@ header p {
 }
 
 .config-section h3 {
-    color: #764ba2;
+    color: #654321;
     margin-bottom: 15px;
     font-size: 1.1em;
-    border-bottom: 2px solid #667eea;
+    border-bottom: 2px solid #A0522D;
     padding-bottom: 5px;
 }
 
@@ -101,7 +101,7 @@ header p {
 .param input:focus,
 .param select:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: #A0522D;
 }
 
 .hint {
@@ -118,7 +118,7 @@ header p {
     height: 18px;
     line-height: 18px;
     text-align: center;
-    background: #667eea;
+    background: #A0522D;
     color: white;
     border-radius: 50%;
     font-size: 12px;
@@ -129,7 +129,7 @@ header p {
 }
 
 .help-btn:hover {
-    background: #764ba2;
+    background: #8B4513;
     transform: scale(1.1);
 }
 
@@ -160,13 +160,13 @@ select {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
     color: white;
 }
 
 .btn-primary:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 5px 15px rgba(139, 69, 19, 0.4);
 }
 
 .btn-secondary {
@@ -219,7 +219,7 @@ select {
 
 /* Estadísticas */
 .stats-section {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
     color: white;
     padding: 15px;
     border-radius: 8px;
@@ -250,7 +250,7 @@ select {
 }
 
 .canvas-container h2 {
-    color: #667eea;
+    color: #8B4513;
     margin-bottom: 15px;
 }
 
@@ -300,7 +300,7 @@ select {
 }
 
 .info-panel h3 {
-    color: #764ba2;
+    color: #654321;
     margin-bottom: 10px;
 }
 
@@ -319,7 +319,7 @@ select {
 }
 
 .chart-container h3 {
-    color: #764ba2;
+    color: #654321;
     margin-bottom: 15px;
 }
 
@@ -341,7 +341,7 @@ select {
     display: block;
     text-align: center;
     font-weight: 600;
-    color: #667eea;
+    color: #A0522D;
 }
 
 /* Scrollbar personalizado */
@@ -355,12 +355,12 @@ select {
 }
 
 .control-panel::-webkit-scrollbar-thumb {
-    background: #667eea;
+    background: #A0522D;
     border-radius: 10px;
 }
 
 .control-panel::-webkit-scrollbar-thumb:hover {
-    background: #764ba2;
+    background: #8B4513;
 }
 
 /* Responsive */
