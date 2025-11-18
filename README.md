@@ -38,8 +38,8 @@ Visualización interactiva del algoritmo ACO (Ant Colony Optimization) para dos 
 
 ### Selector de Problemas
 
-![Selector de problemas](./docs/images/selector.png)
-*[PLACEHOLDER: Añadir captura del selector de problemas]*
+<img width="2568" height="2082" alt="image" src="https://github.com/user-attachments/assets/29960d92-46cb-40ec-980a-6c1783f12428" />
+
 
 Al abrir `index.html` verás un selector con dos opciones:
 - **TSP (Traveling Salesman Problem)**: Para resolver el problema del viajante
@@ -47,8 +47,8 @@ Al abrir `index.html` verás un selector con dos opciones:
 
 ### Problema del Viajante (TSP)
 
-![TSP Visualization](./docs/images/tsp.png)
-*[PLACEHOLDER: Añadir captura de la visualización TSP]*
+<img width="3180" height="2232" alt="image" src="https://github.com/user-attachments/assets/6387a003-80c5-417b-b9b4-c24218cbd08f" />
+
 
 #### Configurar parámetros
 
@@ -61,6 +61,9 @@ Al abrir `index.html` verás un selector con dos opciones:
 - **α (alpha)**: Influencia de la feromona (0-5)
 - **β (beta)**: Influencia de la distancia/heurística (0-5)
 - **Q**: Constante para cálculo de feromona (>0)
+
+<img width="700" height="1724" alt="image" src="https://github.com/user-attachments/assets/cc559da7-705d-4b34-8e9d-f63e9c5967e2" />
+
 
 #### Modos de visualización
 
@@ -75,9 +78,8 @@ Al abrir `index.html` verás un selector con dos opciones:
 - Información detallada de su estado
 
 ### Problema de la Mochila (Knapsack)
+<img width="3190" height="2220" alt="image" src="https://github.com/user-attachments/assets/39806d0b-2b7e-423f-ae27-67ca38f7ffc6" />
 
-![Knapsack Visualization](./docs/images/knapsack.png)
-*[PLACEHOLDER: Añadir captura de la visualización Knapsack]*
 
 #### Configurar parámetros
 
@@ -113,6 +115,11 @@ Al abrir `index.html` verás un selector con dos opciones:
 - Items seleccionados por una hormiga específica
 - Peso acumulado y capacidad disponible
 - Valor total de la solución
+
+
+<img width="2380" height="1442" alt="image" src="https://github.com/user-attachments/assets/4045a0d5-c70c-4a47-afa3-77f0c9d1c21a" />
+
+
 
 ## Algoritmo ACO
 
