@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 type: software
 title: "ACO Visualization - Ant Colony Optimization Interactive Visualizer"
-abstract: "Interactive visualization tool for Ant Colony Optimization (ACO) algorithm applied to Traveling Salesman Problem (TSP) and 0/1 Knapsack Problem. Developed for educational purposes in the Algorithms II course."
+abstract: "Interactive visualization tool for Ant Colony Optimization (ACO) algorithm applied to Traveling Salesman Problem (TSP) and 0/1 Knapsack Problem."
 authors:
   - family-names: "Cavero"
     given-names: "Sergio"
