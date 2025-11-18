@@ -77,6 +77,10 @@ Al abrir `index.html` verás un selector con dos opciones:
 - Nodos visitados (resaltados)
 - Información detallada de su estado
 
+
+<img width="2380" height="1442" alt="image" src="https://github.com/user-attachments/assets/4045a0d5-c70c-4a47-afa3-77f0c9d1c21a" />
+
+
 ### Problema de la Mochila (Knapsack)
 <img width="3190" height="2220" alt="image" src="https://github.com/user-attachments/assets/39806d0b-2b7e-423f-ae27-67ca38f7ffc6" />
 
@@ -116,8 +120,7 @@ Al abrir `index.html` verás un selector con dos opciones:
 - Peso acumulado y capacidad disponible
 - Valor total de la solución
 
-
-<img width="2380" height="1442" alt="image" src="https://github.com/user-attachments/assets/4045a0d5-c70c-4a47-afa3-77f0c9d1c21a" />
+<img width="2380" height="1404" alt="image" src="https://github.com/user-attachments/assets/e0b3587b-1538-4978-8754-0e18733bcc04" />
 
 
 
