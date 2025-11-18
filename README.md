@@ -62,7 +62,7 @@ Al abrir `index.html` verás un selector con dos opciones:
 - **β (beta)**: Influencia de la distancia/heurística (0-5)
 - **Q**: Constante para cálculo de feromona (>0)
 
-<img width="700" height="1724" alt="image" src="https://github.com/user-attachments/assets/cc559da7-705d-4b34-8e9d-f63e9c5967e2" />
+<img width="175" height="431" alt="image" src="https://github.com/user-attachments/assets/cc559da7-705d-4b34-8e9d-f63e9c5967e2" />
 
 
 #### Modos de visualización
