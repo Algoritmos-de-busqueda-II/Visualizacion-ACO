@@ -45,6 +45,12 @@ function setupEventListeners() {
     document.getElementById('instanceSelect').addEventListener('change', (e) => {
         if (e.target.value === 'custom') {
             document.getElementById('fileInput').click();
+            // Resetear el select para que no quede en "Cargar archivo"
+            setTimeout(() => {
+                if (currentInstance) {
+                    e.target.value = 'example';
+                }
+            }, 100);
         } else {
             loadExampleInstance();
         }
@@ -60,6 +66,34 @@ function setupEventListeners() {
     document.getElementById('btnStart').addEventListener('click', startACO);
     document.getElementById('btnPause').addEventListener('click', togglePause);
     document.getElementById('btnReset').addEventListener('click', resetACO);
+    
+    // Botón de descarga de ejemplo
+    document.getElementById('btnDownloadExample').addEventListener('click', () => {
+        const exampleContent = `NAME: ejemplo_10_nodos
+TYPE: TSP
+COMMENT: Instancia de ejemplo con 10 nodos
+DIMENSION: 10
+EDGE_WEIGHT_TYPE: EUC_2D
+NODE_COORD_SECTION
+1 100 200
+2 300 150
+3 500 250
+4 450 400
+5 200 450
+6 350 300
+7 150 350
+8 400 100
+9 250 250
+10 300 400
+EOF`;
+        const blob = new Blob([exampleContent], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'ejemplo_tsp.txt';
+        a.click();
+        URL.revokeObjectURL(url);
+    });
     
     // Slider de velocidad
     document.getElementById('speedSlider').addEventListener('input', (e) => {

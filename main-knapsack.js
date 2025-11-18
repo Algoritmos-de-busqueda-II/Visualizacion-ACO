@@ -38,6 +38,12 @@ function setupEventListeners() {
     document.getElementById('instanceSelect').addEventListener('change', (e) => {
         if (e.target.value === 'custom') {
             document.getElementById('fileInput').click();
+            // Resetear el select para que no quede en "Cargar archivo"
+            setTimeout(() => {
+                if (currentInstance) {
+                    e.target.value = 'example';
+                }
+            }, 100);
         } else {
             loadInstance(exampleInstance);
         }
@@ -64,6 +70,28 @@ function setupEventListeners() {
     document.getElementById('btnStart').addEventListener('click', startACO);
     document.getElementById('btnPause').addEventListener('click', togglePause);
     document.getElementById('btnReset').addEventListener('click', resetACO);
+    
+    // Botón de descarga de ejemplo
+    document.getElementById('btnDownloadExample').addEventListener('click', () => {
+        const exampleContent = `10 269
+54 10
+95 20
+36 30
+18 40
+4 50
+71 5
+83 10
+16 20
+27 30
+84 40`;
+        const blob = new Blob([exampleContent], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'ejemplo_mochila.txt';
+        a.click();
+        URL.revokeObjectURL(url);
+    });
     
     // Slider de velocidad
     document.getElementById('speedSlider').addEventListener('input', (e) => {

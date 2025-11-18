@@ -23,12 +23,17 @@
                 <h2>Configuración</h2>
                 
                 <div class="config-section">
-                    <h3>Instancia de Mochila</h3>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <h3 style="margin: 0;">Instancia de Mochila</h3>
+                        <button id="btnDownloadExample" class="download-example-btn" title="Descargar instancia de ejemplo con el formato correcto">
+                            💾 Formato ejemplo
+                        </button>
+                    </div>
                     <select id="instanceSelect">
                         <option value="example">Ejemplo 10 items</option>
                         <option value="custom">Cargar archivo</option>
                     </select>
-                    <input type="file" id="fileInput" accept=".txt" style="display:none;">
+                    <input type="file" id="fileInput" style="display:none;">
                     <div id="instanceInfo"></div>
                 </div>
 
