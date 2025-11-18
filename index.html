@@ -3,161 +3,218 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visualización ACO</title>
+    <title>Visualización ACO - Seleccionar Problema</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 50px 30px;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .intro h2 {
+            color: #8B4513;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .intro p {
+            color: #666;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .problem-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .problem-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 3px solid transparent;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(139, 69, 19, 0.2);
+            border-color: #A0522D;
+        }
+
+        .problem-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .problem-card h3 {
+            color: #8B4513;
+            font-size: 1.6em;
+            margin-bottom: 15px;
+        }
+
+        .problem-card p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .problem-card .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .problem-card:hover .btn {
+            box-shadow: 0 5px 15px rgba(139, 69, 19, 0.4);
+        }
+
+        footer {
+            background: linear-gradient(135deg, #654321 0%, #8B4513 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .footer-content p {
+            margin: 8px 0;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .footer-content strong {
+            font-weight: 600;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .footer-links a {
+            color: white;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer-links svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            
+            .problem-selector {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🐜 Visualización ACO - Ant Colony Optimization</h1>
-            <p>Optimización por Colonia de Hormigas para el TSP</p>
+            <h1>🐜 Visualización ACO</h1>
+            <p>Ant Colony Optimization - Optimización por Colonia de Hormigas</p>
         </header>
 
-        <div class="main-content">
-            <!-- Panel de control -->
-            <div class="control-panel">
-                <h2>Configuración</h2>
-                
-                <div class="config-section">
-                    <h3>Instancia TSP</h3>
-                    <select id="instanceSelect">
-                        <option value="example">Ejemplo 10 nodos</option>
-                        <option value="custom">Cargar archivo TSP</option>
-                    </select>
-                    <input type="file" id="fileInput" accept=".tsp" style="display:none;">
-                    <div id="instanceInfo"></div>
-                </div>
-
-                <div class="config-section">
-                    <h3>Parámetros ACO</h3>
-                    <div class="param">
-                        <label for="numAnts">
-                            Número de hormigas:
-                            <span class="help-btn" title="Cantidad de hormigas en la colonia. Más hormigas exploran más soluciones pero aumentan el tiempo de cómputo. Recomendado: 10-20">?</span>
-                        </label>
-                        <input type="number" id="numAnts" value="10" min="1" max="50">
-                    </div>
-                    <div class="param">
-                        <label for="maxIterations">
-                            Iteraciones máximas:
-                            <span class="help-btn" title="Número máximo de ciclos completos del algoritmo. Más iteraciones permiten mayor convergencia pero aumentan el tiempo. Recomendado: 50-200">?</span>
-                        </label>
-                        <input type="number" id="maxIterations" value="100" min="1" max="500">
-                    </div>
-                    <div class="param">
-                        <label for="rho">
-                            ρ (evaporación):
-                            <span class="help-btn" title="Coeficiente de persistencia de feromona (0-1). Un ρ alto (ej. 0.9) significa poca evaporación (10%), favoreciendo explotación. Un ρ bajo (ej. 0.5) significa alta evaporación (50%), favoreciendo exploración.">?</span>
-                        </label>
-                        <input type="number" id="rho" value="0.5" min="0" max="1" step="0.05">
-                        <span class="hint" id="rhoHint">Evaporación: 50%</span>
-                    </div>
-                    <div class="param">
-                        <label for="alpha">
-                            α (influencia feromona):
-                            <span class="help-btn" title="Controla el peso de la feromona en la selección de caminos. α alto (ej. 2) favorece rutas con mucha feromona (explotación). α bajo (ej. 0.5) reduce esta influencia (exploración). Recomendado: 0.5-1">?</span>
-                        </label>
-                        <input type="number" id="alpha" value="1.0" min="0" max="5" step="0.1">
-                    </div>
-                    <div class="param">
-                        <label for="beta">
-                            β (influencia distancia):
-                            <span class="help-btn" title="Controla el peso de la visibilidad (1/distancia) en la selección. β alto (ej. 2) favorece caminos cortos (heurística). β bajo reduce esta influencia. Recomendado: 1-2">?</span>
-                        </label>
-                        <input type="number" id="beta" value="2.0" min="0" max="5" step="0.1">
-                    </div>
-                    <div class="param">
-                        <label for="Q">
-                            Q (constante feromona):
-                            <span class="help-btn" title="Constante para calcular la cantidad de feromona depositada (Q/distancia_recorrido). Valores más altos aumentan la cantidad de feromona. Depende del problema.">?</span>
-                        </label>
-                        <input type="number" id="Q" value="100" min="0.1" max="1000" step="10">
-                    </div>
-                </div>
-
-                <div class="config-section">
-                    <h3>Control de Ejecución</h3>
-                    <button id="btnStart" class="btn btn-primary btn-full">Iniciar ACO</button>
-                    <button id="btnPause" class="btn btn-secondary btn-full" disabled>Pausar</button>
-                    <button id="btnReset" class="btn btn-danger btn-full">Reiniciar</button>
-                </div>
-
-                <div class="config-section">
-                    <h3>Velocidad de Animación</h3>
-                    <input type="range" id="speedSlider" min="1" max="100" value="50">
-                    <span id="speedLabel">Media</span>
-                </div>
-
-                <div class="config-section">
-                    <h3>Modo de Visualización</h3>
-                    <div class="radio-group">
-                        <label>
-                            <input type="radio" name="viewMode" value="general" checked>
-                            Vista General (todas las hormigas)
-                        </label>
-                        <label>
-                            <input type="radio" name="viewMode" value="individual">
-                            Hormiga Individual
-                        </label>
-                    </div>
-                    <div id="antSelector" style="display:none;">
-                        <label for="antSelect">Seleccionar hormiga:</label>
-                        <select id="antSelect"></select>
-                    </div>
-                    <div style="margin-top: 15px;">
-                        <label style="display: flex; align-items: center; cursor: pointer;">
-                            <input type="checkbox" id="showPheromoneValues" style="margin-right: 8px;">
-                            Mostrar valores de feromonas
-                        </label>
-                    </div>
-                </div>
-
-                <div class="stats-section">
-                    <h3>Estadísticas</h3>
-                    <div id="stats">
-                        <p><strong>Iteración:</strong> <span id="statIteration">0</span></p>
-                        <p><strong>Mejor distancia:</strong> <span id="statBestDist">-</span></p>
-                        <p><strong>Mejor iteración:</strong> <span id="statBestIter">-</span></p>
-                        <p><strong>Tiempo:</strong> <span id="statTime">0s</span></p>
-                    </div>
-                </div>
+        <div class="content">
+            <div class="intro">
+                <h2>Selecciona el Problema a Resolver</h2>
+                <p>El algoritmo ACO puede aplicarse a diferentes problemas de optimización combinatoria. 
+                   Elige el problema que deseas visualizar y explorar.</p>
             </div>
 
-            <!-- Canvas de visualización -->
-            <div class="visualization-panel">
-                <div class="canvas-container">
-                    <h2>Grafo TSP con Feromonas</h2>
-                    <canvas id="mainCanvas"></canvas>
-                    <div class="legend">
-                        <div class="legend-item">
-                            <div class="legend-color" style="background: #333;"></div>
-                            <span>Arista sin feromona</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color" style="background: #00ff00;"></div>
-                            <span>Feromona alta</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color" style="background: #ff0000;"></div>
-                            <span>Mejor recorrido</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color ant"></div>
-                            <span>Hormiga actual</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="problem-selector">
+                <a href="tsp.html" class="problem-card">
+                    <div class="problem-icon">🗺️</div>
+                    <h3>Problema del Viajante (TSP)</h3>
+                    <p>Encuentra el camino más corto que visita todas las ciudades exactamente una vez y regresa al punto de partida.</p>
+                    <span class="btn">Resolver TSP</span>
+                </a>
 
-                <div class="info-panel">
-                    <h3>Estado Actual</h3>
-                    <div id="currentState"></div>
-                </div>
-
-                <div class="chart-container">
-                    <h3>Convergencia</h3>
-                    <canvas id="chartCanvas"></canvas>
-                </div>
+                <a href="knapsack.html" class="problem-card">
+                    <div class="problem-icon">🎒</div>
+                    <h3>Problema de la Mochila</h3>
+                    <p>Selecciona los objetos con mayor valor sin exceder la capacidad de la mochila.</p>
+                    <span class="btn">Resolver Mochila</span>
+                </a>
             </div>
         </div>
     </div>
@@ -180,9 +237,5 @@
             </div>
         </div>
     </footer>
-
-    <script src="aco.js"></script>
-    <script src="visualization.js"></script>
-    <script src="main.js"></script>
 </body>
 </html>
