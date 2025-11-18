@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualización ACO - Problema de la Mochila</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="knapsack-style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-nav">
+                <a href="index.html" class="back-btn" title="Volver a selección de problemas">← Volver</a>
+            </div>
+            <h1>🐜 Visualización ACO - Problema de la Mochila</h1>
+            <p>Optimización por Colonia de Hormigas para el 0/1 Knapsack Problem</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Panel de control -->
+            <div class="control-panel">
+                <h2>Configuración</h2>
+                
+                <div class="config-section">
+                    <h3>Instancia de Mochila</h3>
+                    <select id="instanceSelect">
+                        <option value="example">Ejemplo 10 items</option>
+                        <option value="custom">Cargar archivo</option>
+                    </select>
+                    <input type="file" id="fileInput" accept=".txt" style="display:none;">
+                    <div id="instanceInfo"></div>
+                </div>
+
+                <div class="config-section">
+                    <h3>Parámetros ACO</h3>
+                    <div class="param">
+                        <label for="numAnts">
+                            Número de hormigas:
+                            <span class="help-btn" title="Cantidad de hormigas en la colonia. Cada hormiga construye una solución seleccionando objetos. Recomendado: 10-20">?</span>
+                        </label>
+                        <input type="number" id="numAnts" value="10" min="1" max="50">
+                    </div>
+                    <div class="param">
+                        <label for="maxIterations">
+                            Iteraciones máximas:
+                            <span class="help-btn" title="Número máximo de ciclos completos del algoritmo. Más iteraciones permiten mayor convergencia. Recomendado: 50-200">?</span>
+                        </label>
+                        <input type="number" id="maxIterations" value="100" min="1" max="500">
+                    </div>
+                    <div class="param">
+                        <label for="rho">
+                            ρ (evaporación):
+                            <span class="help-btn" title="Coeficiente de persistencia de feromona (0-1). Un ρ alto significa poca evaporación, favoreciendo explotación. Un ρ bajo significa alta evaporación, favoreciendo exploración.">?</span>
+                        </label>
+                        <input type="number" id="rho" value="0.5" min="0" max="1" step="0.05">
+                        <span class="hint" id="rhoHint">Evaporación: 50%</span>
+                    </div>
+                    <div class="param">
+                        <label for="alpha">
+                            α (influencia feromona):
+                            <span class="help-btn" title="Controla el peso de la feromona en la selección de objetos. α alto favorece objetos con mucha feromona. Recomendado: 1-2">?</span>
+                        </label>
+                        <input type="number" id="alpha" value="1.0" min="0" max="5" step="0.1">
+                    </div>
+                    <div class="param">
+                        <label for="beta">
+                            β (influencia heurística):
+                            <span class="help-btn" title="Controla el peso de la información heurística (valor/peso) en la selección. β alto favorece objetos con mejor ratio. Recomendado: 2-5">?</span>
+                        </label>
+                        <input type="number" id="beta" value="3.0" min="0" max="10" step="0.1">
+                    </div>
+                    <div class="param">
+                        <label for="Q">
+                            Q (constante feromona):
+                            <span class="help-btn" title="Constante para calcular la cantidad de feromona depositada (Q/valor_total). Depende del problema.">?</span>
+                        </label>
+                        <input type="number" id="Q" value="100" min="0.01" max="1000" step="0.01">
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <h3>Control de Ejecución</h3>
+                    <button id="btnStart" class="btn btn-primary btn-full">Iniciar ACO</button>
+                    <button id="btnPause" class="btn btn-secondary btn-full" disabled>Pausar</button>
+                    <button id="btnReset" class="btn btn-danger btn-full">Reiniciar</button>
+                </div>
+
+                <div class="config-section">
+                    <h3>Velocidad de Animación</h3>
+                    <input type="range" id="speedSlider" min="1" max="100" value="50">
+                    <span id="speedLabel">Media</span>
+                </div>
+
+                <div class="config-section">
+                    <h3>Modo de Visualización</h3>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="viewMode" value="general" checked>
+                            Vista General (todas las hormigas)
+                        </label>
+                        <label>
+                            <input type="radio" name="viewMode" value="individual">
+                            Hormiga Individual
+                        </label>
+                    </div>
+                    <div id="antSelector" style="display:none;">
+                        <label for="antSelect">Seleccionar hormiga:</label>
+                        <select id="antSelect"></select>
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <label style="display: flex; align-items: center; cursor: pointer;">
+                            <input type="checkbox" id="showPheromoneValues" style="margin-right: 8px;">
+                            Mostrar valores de feromonas
+                        </label>
+                    </div>
+                </div>
+
+                <div class="stats-section">
+                    <h3>Estadísticas</h3>
+                    <div id="stats">
+                        <p><strong>Iteración:</strong> <span id="statIteration">0</span></p>
+                        <p><strong>Mejor valor:</strong> <span id="statBestValue">-</span></p>
+                        <p><strong>Peso usado:</strong> <span id="statBestWeight">-</span></p>
+                        <p><strong>Mejor iteración:</strong> <span id="statBestIter">-</span></p>
+                        <p><strong>Tiempo:</strong> <span id="statTime">0s</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Canvas de visualización -->
+            <div class="visualization-panel">
+                <div class="canvas-container">
+                    <h2>Visualización de Objetos y Mochila</h2>
+                    <canvas id="mainCanvas"></canvas>
+                    <div class="legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #ccc;"></div>
+                            <span>Objeto no seleccionado</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #4CAF50;"></div>
+                            <span>Objeto seleccionado</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #ff9800;"></div>
+                            <span>Mejor solución</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color ant"></div>
+                            <span>Hormiga actual</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-panel">
+                    <h3>Estado Actual</h3>
+                    <div id="currentState"></div>
+                </div>
+
+                <div class="chart-container">
+                    <h3>Convergencia</h3>
+                    <canvas id="chartCanvas"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>© 2025 Sergio Cavero. Todos los derechos reservados.</p>
+            <p>Desarrollado para la asignatura <strong>Algoritmos de Búsqueda II</strong> (Grado en Inteligencia Artificial de la URJC)</p>
+            <div class="footer-links">
+                <a href="https://github.com/Algoritmos-de-busqueda-II/Visualizacion-ACO" target="_blank" rel="noopener noreferrer" title="Repositorio GitHub">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/sergio-cavero" target="_blank" rel="noopener noreferrer" title="Perfil LinkedIn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.39v-1.2h-2.5v8.5h2.5v-4.74c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.74h2.5M6.5 8a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3m1.5 1h-3V19h3V9z"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="aco-knapsack.js"></script>
+    <script src="visualization-knapsack.js"></script>
+    <script src="main-knapsack.js"></script>
+</body>
+</html>
